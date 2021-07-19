@@ -81,7 +81,7 @@ const Pomodoro: React.FC = () => {
           return !tick
         })
       },
-      1000
+      500
     )
     setTimer(interval)
   }
