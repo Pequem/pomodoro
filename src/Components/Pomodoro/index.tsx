@@ -163,6 +163,9 @@ const Pomodoro: React.FC = () => {
         <Typography.Title level={4}>
           {isRest ? 'Relaxe' : 'Trabalhe'}
         </Typography.Title>
+        <Typography.Title level={5}>
+          {currentTimeSpent}/{isRest ? getRestTime() : parameters.workCycleLength} Segundos
+        </Typography.Title>
         <div className='pomodoro-progress'>
           {
             Array(parameters.cycles * 2).fill(0).map((_, index) => {
