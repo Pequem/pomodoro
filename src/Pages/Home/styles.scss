@@ -1,0 +1,29 @@
+.content {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+
+    .align-center {
+        margin: auto;
+    }
+
+    .background {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        z-index: -1;
+
+        img{
+            margin-right: 0;
+            margin-bottom: 0;
+            width: 300px;
+            height: auto;
+            opacity: 0.3;
+        }
+    }
+}
+
+
+
