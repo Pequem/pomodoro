@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import {
   Modal,
   Space,
-  Form,
   Typography
 } from 'antd'
 import TimerPicker from '../TimerPicker'
@@ -33,32 +32,45 @@ const ModalSettings: React.FC<IProps> = (props: IProps) => {
   })
 
   const handleChange = (name: string, value: number) => {
+    setFormData((data:any) => {
+      data[name] = value
 
+      return { ...data }
+    })
   }
 
   const handleOk = () => {
     props.onSave(formData)
   }
 
+  const cyclesHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value.replace(/\D/, '')
+    setFormData((data:any) => {
+      data.cycles = value
+
+      return { ...data }
+    })
+  }
+
   return (
     <Modal visible={props.visible} title='Configuração do pomodoro' onCancel={props.onClose} onOk={handleOk}>
-      <Space>
-        <div>
+      <Space direction='vertical'>
+        <Space direction='vertical'>
           <Typography.Text>Ciclos</Typography.Text>
-          <input name='shortBreakCycleLength' />
-        </div>
-        <div>
+          <input type='text' pattern="[0-9]*" name='shortBreakCycleLength' onChange={(val) => cyclesHandler(val)} value={formData.cycles} />
+        </Space>
+        <Space direction='vertical'>
           <Typography.Text>Tempo de trabalho</Typography.Text>
-          <TimerPicker name='workCycleLength' onChange={handleChange} />
-        </div>
-        <div>
+          <TimerPicker name='workCycleLength' onChange={handleChange} value={formData.workCycleLength} />
+        </Space>
+        <Space direction='vertical'>
           <Typography.Text>Tempo do intervalo longo</Typography.Text>
-          <TimerPicker name='longBreakCycleLength' onChange={handleChange} />
-        </div>
-        <div>
+          <TimerPicker name='longBreakCycleLength' onChange={handleChange} value={formData.longBreakCycleLength} />
+        </Space>
+        <Space direction='vertical'>
           <Typography.Text>Tempo do intervalo curto</Typography.Text>
-          <TimerPicker name='shortBreakCycleLength' onChange={handleChange} value={} />
-        </div>
+          <TimerPicker name='shortBreakCycleLength' onChange={handleChange} value={formData.shortBreakCycleLength} />
+        </Space>
       </Space>
     </Modal>
   )

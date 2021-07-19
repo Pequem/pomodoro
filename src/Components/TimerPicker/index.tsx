@@ -13,11 +13,12 @@ import './styles.scss'
 
 interface IProps {
   name: string,
-  onChange: (name: string, value: number) => void
+  onChange: (name: string, value: number) => void,
+  value: number
 }
 
 const TimerPicker: React.FC<IProps> = (props: IProps) => {
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(props.value)
   const [pickerVisible, setPickerVisible] = useState(false)
   const input = useRef<HTMLInputElement>(null)
   const picker = useRef<HTMLDivElement>(null)

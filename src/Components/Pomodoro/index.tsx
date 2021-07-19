@@ -103,7 +103,7 @@ const Pomodoro: React.FC = () => {
     setOpenModal(true)
   }
 
-  const handlerSettingsChange = (data:any) => {
+  const handlerSettingsChange = (data: any) => {
     setParameters(data)
     reset()
     setOpenModal(false)
@@ -147,12 +147,14 @@ const Pomodoro: React.FC = () => {
 
   return (
     <>
-      <ModalSettings
-        onSave={handlerSettingsChange}
-        onClose={() => setOpenModal(false)}
-        {...parameters}
-        visible={openModal}
-      />
+      {openModal &&
+        <ModalSettings
+          onSave={handlerSettingsChange}
+          onClose={() => setOpenModal(false)}
+          {...parameters}
+          visible={openModal}
+        />
+      }
       <Card className='card-pomodoro'>
         <Typography.Title level={2}>Pomodoro</Typography.Title>
         <div className='pomodoro-icon'>
